@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-5">
+            <form>
+                <div class="mb-3">
+                    <label for="inputTitulo" class="form-label">Titulo</label>
+                    <input type="text" class="form-control" id="inputTitulo" name="titulo" #titulo="ngModel" [(ngModel)]="encuestaModel.titulo">
+                </div>
+                <div class="mb-3">
+                    <label for="inputAutor" class="form-label">Autor</label>
+                    <input class="form-control" id="inputAutor" name="usuario" rows="3" #usuario="ngModel" [(ngModel)]="encuestaModel.creadorEncuesta.usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="inputDescripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="inputDescripcion" name="descripcion" rows="3" #descripcion="ngModel" [(ngModel)]="encuestaModel.descripcion"></textarea>
+                </div>
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" aria-current="true" *ngFor="let enc of encuestaModel.listaComentarios">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ enc.idUsuarioComentario.usuario}}</h5>
+                            <small>3 days ago</small>
+                        </div>
+                        <p class="mb-1">{{enc.textoComentario}}</p>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

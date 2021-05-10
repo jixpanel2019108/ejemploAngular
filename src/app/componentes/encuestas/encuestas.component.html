@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarEncuesta"><i class="bi bi-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4" *ngFor="let enc of encuestasModelGet; let i = index">
+            <div class="card mb-3" style="max-width: 18rem;">
+                <div class="card-header">{{enc.titulo}}</div>
+                <div class="card-body">
+                    <p class="card-text">{{enc.descripcion}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <!-- <button type="button" class="btn btn-primary" (click)="navegarDetalleEncuesta(enc._id)"><i class="bi bi-info-square"></i></button> -->
+                        <button type="button" class="btn btn-primary" [routerLink]="['/detalleEncuesta',enc._id]"><i class="bi bi-info-square"></i></button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" [attr.data-bs-target]="'#acor'+i" aria-expanded="false" [attr.aria-controls]="'#acor'+i" (click)="obtenerEncuesta(enc._id)"><i class="bi bi-chat-square-text" ></i></button>
+                        <button type="button" class="btn btn-primary">Right</button>
+                    </div>
+                </div>
+                <div class="collapse " [attr.id]=" 'acor'+i">
+                    <div class="card card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="inputTextoComentario" class="form-label ">Texto Comentarios</label>
+                                <input type="text " class="form-control " id="inputTextoComentario" name="textoComentario" #textoComentario="ngModel" [(ngModel)]="modeloComentario.textoComentario">
+                            </div>
+                            <div class="text-end">
+                                <button type="button " class="btn btn-primary" data-bs-toggle="collapse" [attr.data-bs-target]="'#acor'+i" (click)="agregarComentario()"><i class="bi bi-arrow-return-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal AGREGAR ENCUESTA -->
+<div class="modal fade" id="modalAgregarEncuesta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="inputTitulo" class="form-label">Titulo</label>
+                        <input type="text" class="form-control" id="inputTitulo" name="titulo" #titulo="ngModel" [(ngModel)]="escuestasModelAdd.titulo">
+                    </div>
+
+                    <div class="mb-3 ">
+                        <label for="inputDescripcion" class="form-label ">Descripcion</label>
+                        <textarea class="form-control" id="inputDescripcion" rows="3" name="descripcion" #descripcion="ngModel" [(ngModel)]="escuestasModelAdd.descripcion"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="agregarEncuestas()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
