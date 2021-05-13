@@ -17,8 +17,17 @@
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action" aria-current="true" *ngFor="let enc of encuestaModel.listaComentarios">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{ enc.idUsuarioComentario.usuario}}</h5>
-                            <small>3 days ago</small>
+                            <h5 class="mb-1"><img *ngIf="enc.idUsuarioComentario.imagen === null" src="/assets/usuario.png" class="avatarPerfil">
+                                <img *ngIf="enc.idUsuarioComentario.imagen" [src]="enc.idUsuarioComentario.imagen" class="avatarPerfil"> {{ enc.idUsuarioComentario.usuario}}</h5>
+                            <small *ngIf="_usuarioService.getIdentidad().rol === 'ROL_ADMIN'">
+                                <div class="dropdown">                  
+                                    <button class="btn btn-secondary btn-sm " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                  </button>                  
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">                    
+                                        <li><a class="dropdown-item" href="#">Editar</a></li>                    
+                                        <li><a class="dropdown-item" href="#">Eliminar</a></li>                    
+                                    </ul>                
+                                </div>
+                            </small>
                         </div>
                         <p class="mb-1">{{enc.textoComentario}}</p>
                     </a>
